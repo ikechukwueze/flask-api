@@ -1,20 +1,21 @@
 from api import app
-import json
 
 
+#for post requests
 song_data = {'name':'Songstress', 'duration': 300}
 
 podcast_data = { 'name':'Podcast Show', 'duration': 3000, 'host': 'Podcaster'}
 
 audiobook_data = {'title':'The Story of John Smith', 'author': 'John Smith',
-                    'narrator': 'Jane Smith', 'duration': 3000}
+                    'narrator': 'John Smith', 'duration': 3000}
 
 
-song_data_edit = {'name':'Songstress', 'duration': 400}
+#for put requests
+song_data_edit = {'name':'Songster', 'duration': 400}
 
-podcast_data_edit = { 'name':'Podcast Show', 'duration': 4000, 'host': 'Podcaster'}
+podcast_data_edit = { 'name':'Podcast No Show', 'duration': 4000, 'host': 'Podcaster'}
 
-audiobook_data_edit = {'title':'The Story of John Smith', 'author': 'John Smith',
+audiobook_data_edit = {'title':'The Story of Jane Smith', 'author': 'John Smith',
                     'narrator': 'Jane Smith', 'duration': 4000}
 
 
@@ -30,6 +31,30 @@ headers = {'Content-Type': mimetype, 'Accept': mimetype}
 
 audiofiles_to_test = ['songs', 'podcasts', 'audiobooks']
 test_id = 5
+
+
+
+
+def test_post_or_put():
+
+    for audiofile, data in post_data_to_test.items():
+        
+        post_response = app.test_client().post('/api/{}'.format(audiofile), json=data, headers=headers)
+        
+        assert post_response.status_code == 200
+
+
+    for audiofile, data in put_data_to_test.items():
+        print(audiofile)
+        put_response = app.test_client().put('/api/{}/{}'.format(audiofile, test_id), json=data, headers=headers)
+
+        assert put_response.status_code == 200
+
+
+
+
+
+
 
 
 def test_get_or_delete():
@@ -59,17 +84,3 @@ def test_get_or_delete():
 
 
 
-def test_post_or_put():
-
-    for audiofile, data in post_data_to_test.items():
-        
-        post_response = app.test_client().post('/api/{}'.format(audiofile), json=data, headers=headers)
-        
-        assert post_response.status_code == 200
-
-
-    for audiofile, data in put_data_to_test.items():
-        print(audiofile)
-        put_response = app.test_client().put('/api/{}/{}'.format(audiofile, test_id), json=data, headers=headers)
-
-        assert put_response.status_code == 200
