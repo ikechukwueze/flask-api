@@ -27,7 +27,7 @@ class songs(db.Model):
 
     
 
-    id              = db.Column(db.Integer, unique=True, primary_key=True, nullable=False)
+    id              = db.Column(db.Integer, primary_key=True, nullable=False)
     name            = db.Column(db.String(100), nullable=False)
     duration        = db.Column(db.Integer, db.CheckConstraint('duration > 0'), nullable=False)
     uploaded_time   = db.Column(db.DateTime, nullable=False, default=datetime.datetime.now)
@@ -46,7 +46,7 @@ class podcasts(db.Model):
     participants: str
 
 
-    id              = db.Column(db.Integer, unique=True, primary_key=True, nullable=False)
+    id              = db.Column(db.Integer, primary_key=True, nullable=False)
     name            = db.Column(db.String(100), nullable=False)
     duration        = db.Column(db.Integer, db.CheckConstraint('duration > 0'), nullable=False)
     uploaded_time   = db.Column(db.DateTime, nullable=False, default=datetime.datetime.now)
@@ -92,7 +92,7 @@ class audiobooks(db.Model):
     uploaded_time: str
 
 
-    id              = db.Column(db.Integer, unique=True, primary_key=True, nullable=False)
+    id              = db.Column(db.Integer, primary_key=True, nullable=False)
     title           = db.Column(db.String(100), nullable=False)
     author          = db.Column(db.String(100), nullable=False)
     narrator        = db.Column(db.String(100), nullable=False)
