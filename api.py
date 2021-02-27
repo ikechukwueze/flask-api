@@ -1,5 +1,4 @@
 import datetime
-import json
 from dataclasses import dataclass
 
 from flask import Flask, render_template
@@ -65,9 +64,9 @@ class podcast_participants(db.Model):
     name: str
     podcast_id: int
 
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100), nullable=False)
-    podcast_id = db.Column(db.Integer, db.ForeignKey('podcasts.id'))
+    id          = db.Column(db.Integer, primary_key=True)
+    name        = db.Column(db.String(100), nullable=False)
+    podcast_id  = db.Column(db.Integer, db.ForeignKey('podcasts.id'))
 
     #podcast participant constraint
     def __init__(self, *args, **kwargs):
@@ -121,8 +120,8 @@ def home():
 def post_or_put(audioFileType, audioFileID=None):
     
     if audioFileType in audioFileTypes:
-        data = request.get_json()
-        method = request.method
+        data    = request.get_json()
+        method  = request.method
 
         response = create_or_update(audioFileType, method, data, audioFileID)
 
@@ -146,9 +145,9 @@ def create_or_update(audioFileType, method, data, audioFileID=None):
 
             
             if method == 'PUT':
-                resource = songs.query.get(audioFileID)
-                resource.name = name
-                resource.duration = duration
+                resource            = songs.query.get(audioFileID)
+                resource.name       = name
+                resource.duration   = duration
 
             elif method == 'POST':
                 resource = songs(name=name, duration=duration)
@@ -158,17 +157,17 @@ def create_or_update(audioFileType, method, data, audioFileID=None):
             
         
         elif audioFileType == 'podcasts':
-            name = data['name']
-            duration = data['duration']
-            host = data['host']
-            #participants = data['participants']
+            name        = data['name']
+            duration    = data['duration']
+            host        = data['host']
+            
 
 
             if method == 'PUT':
-                resource = podcasts.query.get(audioFileID)
-                resource.name = name
-                resource.duration = duration
-                resource.host = host
+                resource            = podcasts.query.get(audioFileID)
+                resource.name       = name
+                resource.duration   = duration
+                resource.host       = host
 
 
             elif method == 'POST':
@@ -180,18 +179,18 @@ def create_or_update(audioFileType, method, data, audioFileID=None):
 
 
         elif audioFileType == 'audiobooks':
-            title = data['title']
-            author = data['author']
-            duration = data['duration']
-            narrator = data['narrator']
+            title       = data['title']
+            author      = data['author']
+            duration    = data['duration']
+            narrator    = data['narrator']
 
 
             if method == 'PUT':
-                resource = audiobooks.query.get(audioFileID)
-                resource.title = title
-                resource.duration = duration
-                resource.author = author
-                resource.narrator = narrator
+                resource            = audiobooks.query.get(audioFileID)
+                resource.title      = title
+                resource.duration   = duration
+                resource.author     = author
+                resource.narrator   = narrator
 
             elif method == 'POST':
                 resource = audiobooks(title=title, duration=duration, author=author, narrator=narrator)
