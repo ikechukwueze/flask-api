@@ -1,7 +1,7 @@
 from api import app
 
 
-#for post requests
+#data for post requests
 song_data = {'name':'Songstress', 'duration': 300}
 
 podcast_data = { 'name':'Podcast Show', 'duration': 3000, 'host': 'Podcaster'}
@@ -10,7 +10,7 @@ audiobook_data = {'title':'The Story of John Smith', 'author': 'John Smith',
                     'narrator': 'John Smith', 'duration': 3000}
 
 
-#for put requests
+#data for put requests
 song_data_edit = {'name':'Songster', 'duration': 400}
 
 podcast_data_edit = { 'name':'Podcast No Show', 'duration': 4000, 'host': 'Podcaster'}
