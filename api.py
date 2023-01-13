@@ -1,6 +1,5 @@
 import datetime
 from dataclasses import dataclass
-
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask import request, jsonify
@@ -46,12 +45,12 @@ class podcasts(db.Model):
     participants: str
 
 
-    id              = db.Column(db.Integer, primary_key=True, nullable=False)
-    name            = db.Column(db.String(100), nullable=False)
-    duration        = db.Column(db.Integer, db.CheckConstraint('duration > 0'), nullable=False)
-    uploaded_time   = db.Column(db.DateTime, nullable=False, default=datetime.datetime.now)
-    host            = db.Column(db.String(100), nullable=False)
-    participants    = db.relationship('podcast_participants', backref='podcast')
+    id = db.Column(db.Integer, primary_key=True, nullable=False)
+    name = db.Column(db.String(100), nullable=False)
+    duration = db.Column(db.Integer, db.CheckConstraint('duration > 0'), nullable=False)
+    uploaded_time = db.Column(db.DateTime, nullable=False, default=datetime.datetime.now)
+    host = db.Column(db.String(100), nullable=False)
+    participants = db.relationship('podcast_participants', backref='podcast')
 
 
 
@@ -64,9 +63,9 @@ class podcast_participants(db.Model):
     name: str
     podcast_id: int
 
-    id          = db.Column(db.Integer, primary_key=True)
-    name        = db.Column(db.String(100), nullable=False)
-    podcast_id  = db.Column(db.Integer, db.ForeignKey('podcasts.id'))
+    id  = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    podcast_id = db.Column(db.Integer, db.ForeignKey('podcasts.id'))
 
     #podcast participant constraint
     def __init__(self, *args, **kwargs):
@@ -92,12 +91,12 @@ class audiobooks(db.Model):
     uploaded_time: str
 
 
-    id              = db.Column(db.Integer, primary_key=True, nullable=False)
-    title           = db.Column(db.String(100), nullable=False)
-    author          = db.Column(db.String(100), nullable=False)
-    narrator        = db.Column(db.String(100), nullable=False)
-    duration        = db.Column(db.Integer, db.CheckConstraint('duration > 0'), nullable=False)
-    uploaded_time   = db.Column(db.DateTime, nullable=False, default=datetime.datetime.now)
+    id = db.Column(db.Integer, primary_key=True, nullable=False)
+    title = db.Column(db.String(100), nullable=False)
+    author = db.Column(db.String(100), nullable=False)
+    narrator = db.Column(db.String(100), nullable=False)
+    duration = db.Column(db.Integer, db.CheckConstraint('duration > 0'), nullable=False)
+    uploaded_time = db.Column(db.DateTime, nullable=False, default=datetime.datetime.now)
 
 
 
