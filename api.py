@@ -27,10 +27,10 @@ class songs(db.Model):
 
     
 
-    id              = db.Column(db.Integer, primary_key=True, nullable=False)
-    name            = db.Column(db.String(100), nullable=False)
-    duration        = db.Column(db.Integer, db.CheckConstraint('duration > 0'), nullable=False)
-    uploaded_time   = db.Column(db.DateTime, nullable=False, default=datetime.datetime.now)
+    id = db.Column(db.Integer, primary_key=True, nullable=False)
+    name = db.Column(db.String(100), nullable=False)
+    duration = db.Column(db.Integer, db.CheckConstraint('duration > 0'), nullable=False)
+    uploaded_time = db.Column(db.DateTime, nullable=False, default=datetime.datetime.now)
 
 
 
@@ -262,9 +262,6 @@ def get_or_delete(audioFileType, audioFileID=None):
                 resource.delete()
                 db.session.commit()
                 return '', 200
-
-
-                
     
     else:
         return "<p>The resource could not be found.</p>", 400
