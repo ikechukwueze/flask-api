@@ -16,9 +16,6 @@ db = SQLAlchemy(app)
 
 
 
-
-
-
 #database models
 @dataclass
 class songs(db.Model):
